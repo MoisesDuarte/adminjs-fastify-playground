@@ -1,8 +1,8 @@
-import AdminJS from 'adminjs'
-import Fastify from 'fastify'
-import * as AdminJSFastify from '@adminjs/fastify'
+import AdminJS from 'adminjs';
+import Fastify from 'fastify';
+import AdminJSFastify from '@adminjs/fastify';
 
-const PORT = 3000
+const PORT = 3000;
 
 const start = async () => {
   const app = Fastify();
@@ -17,7 +17,7 @@ const start = async () => {
     admin,
     app,
   );
-  
+
   app.listen({ port: PORT }, (err, addr) => {
     if (err) {
       console.error(err);

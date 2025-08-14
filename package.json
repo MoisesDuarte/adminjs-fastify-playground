@@ -2,17 +2,28 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/app.ts",
+    "lint": "eslint src --ext ts,tsx",
+    "lint:fix": "eslint src --ext ts,tsx --fix",
     "build": "tsc",
     "start": "node dist/app.js"
   },
   "dependencies": {
     "@adminjs/fastify": "4.2.0",
     "adminjs": "7.8.17",
-    "fastify": "5.5.0",
-    "tslib": "2.8.1"
+    "fastify": "5.5.0"
   },
   "devDependencies": {
     "@types/node": "24.2.1",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
+    "eslint": "8.57.1",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "tslib": "2.8.1",
     "tsx": "4.20.4",
     "typescript": "5.9.2"
   }
