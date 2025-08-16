@@ -17,11 +17,15 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "paths": {
+      "@db/*": ["src/db/*"]
+    }
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
     "**/src/**/*"
-  ]
+  ],
+
 }

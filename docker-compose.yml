@@ -1,5 +1,6 @@
 volumes:
   pgdata:
+  nodemodules:
 
 services:
   app:
@@ -11,7 +12,7 @@ services:
       - "3000:3000"
     volumes:
       - ./:/app
-      - /app/node_modules
+      - nodemodules:/app/node_modules
     env_file:
       - .env
     depends_on:
