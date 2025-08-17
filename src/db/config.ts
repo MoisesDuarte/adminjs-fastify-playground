@@ -5,7 +5,7 @@ const base = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
-  entities: ['src/db/entities/*.{j,t}s'],
+  entities: ['src/**/*.entity.{j,t}s'],
   migrationsTableName: 'migrations',
   migrationsTransactionMode: 'all' as any,
   migrations: ['src/db/migrations/*.{j,t}s'],
