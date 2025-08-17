@@ -11,6 +11,13 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    indent: 'off',
+    '@typescript-eslint/indent': ['error', 2, {
+      ignoredNodes: ['PropertyDefinition'], // ignores class properties with decorators
+    }],
     'import/no-unresolved': 'off',
-  }
+    'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
+  },
 };

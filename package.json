@@ -5,7 +5,12 @@
     "lint": "eslint src --ext ts,tsx",
     "lint:fix": "eslint src --ext ts,tsx --fix",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "typeorm": "tsx -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "db:migrate": "yarn typeorm -- migration:run -d src/db/data-source",
+    "db:migrate:create": "yarn typeorm -- migration:create",
+    "db:migrate:generate": "yarn typeorm -- migration:generate -d src/db/data-source",
+    "db:migrate:revert": "yarn typeorm -- migration:revert -d src/db/data-source"
   },
   "dependencies": {
     "@adminjs/fastify": "4.2.0",

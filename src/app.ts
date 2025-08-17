@@ -1,8 +1,8 @@
 import AdminJS from 'adminjs';
 import Fastify from 'fastify';
 import AdminJSFastify from '@adminjs/fastify';
-import { Database, Resource } from '@adminjs/typeorm';
-import { DataSource } from 'typeorm';
+import { AccountEntity } from '@db/entities/account.entity.js';
+import initializeDb from './db/index.js';
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
@@ -10,29 +10,21 @@ const HOST = '0.0.0.0';
 const start = async () => {
   const app = Fastify();
 
-  AdminJS.registerAdapter({ Database, Resource });
-
-  const db = new DataSource({
-    type: 'postgres',
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE_PAYMENTS,
-    host: process.env.DB_HOST,
-    synchronize: false,
-    entities: [],
-    migrationsTableName: 'migrations',
-    migrationsTransactionMode: 'all',
-    migrations: [],
-    migrationsRun: false,
-    subscribers: [],
-  });
-
-  await db.initialize();
+  await initializeDb();
 
   const admin = new AdminJS({
+
     rootPath: '/admin',
-    resources: [],
-    databases: [],
+    resources: [{
+      resource: AccountEntity,
+      options: {
+        id: 'Accounts',
+        navigation: {
+          name: 'Transfers',
+          icon: 'Home',
+        },
+      },
+    }],
   });
 
   if (process.env.NODE_ENV === 'production') {
