@@ -2,7 +2,7 @@ import AdminJS from 'adminjs';
 import Fastify from 'fastify';
 import AdminJSFastify from '@adminjs/fastify';
 import initializeDb from './db/index.js';
-import accountResource from './modules/account/account.resource.js';
+import accountResource from './resources/account/account.resource.js';
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
