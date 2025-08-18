@@ -1,4 +1,4 @@
 export const baseNavigation = {
-  name: 'Transfers',
+  name: 'Home',
   icon: 'Home',
 };
