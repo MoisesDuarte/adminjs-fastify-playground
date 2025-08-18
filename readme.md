@@ -18,6 +18,7 @@ This project is a Node.js application built using Fastify, TypeORM, and AdminJS.
 3. Update the environment variables in the `.env` file as needed
 4. Build the Docker image: `docker-compose build`
 5. Start the Docker containers: `docker-compose up`
+6. Access the pg instance and create the database if not already created.
 
 ### Running the Application
 
