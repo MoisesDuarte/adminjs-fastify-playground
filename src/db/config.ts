@@ -1,6 +1,7 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions.js';
+import { SnakeNamingStrategy } from './snake-naming-strategy.js';
 
-const base = {
+const base: PostgresConnectionOptions = {
   type: 'postgres' as any,
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -12,6 +13,7 @@ const base = {
   migrationsRun: true,
   subscribers: [],
   synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
 };
 
 export const getConfig = (): PostgresConnectionOptions => {

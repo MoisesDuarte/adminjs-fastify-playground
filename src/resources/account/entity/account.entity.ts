@@ -20,6 +20,9 @@ export class Account extends BaseEntity {
   name: string;
 
   @Column({ type: 'varchar' })
+  taxNumber: string;
+
+  @Column({ type: 'varchar' })
   bank: string; // TODO: Change to bank relationship later
 
   @Column({ type: 'varchar' })
