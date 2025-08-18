@@ -1,17 +1,17 @@
 import {
-  BaseEntity,
   Check,
   Column,
   Entity,
-  PrimaryGeneratedColumn,
+  OneToMany,
 } from 'typeorm';
+
+import { BaseEntity } from 'src/shared/base.entity.js';
+
+import { ComplianceEntity } from 'src/resources/compliance/entity/compliance.entity.js';
 import { EAccountStatus } from '../enums/account-status.enum.js';
 
 @Entity('accounts')
 export class AccountEntity extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @Check(`status IN (${Object.values(EAccountStatus).map((s) => `'${s}'`).join(', ')})`)
   @Column({ type: 'varchar', default: EAccountStatus.PENDING })
   status: EAccountStatus;
@@ -31,12 +31,6 @@ export class AccountEntity extends BaseEntity {
   @Column({ type: 'int8', default: 0 })
   balance: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  updatedAt: Date;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  deletedAt: Date;
+  @OneToMany(() => ComplianceEntity, (compliance) => compliance.account)
+  compliances: ComplianceEntity[];
 }

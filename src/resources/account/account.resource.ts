@@ -1,26 +1,16 @@
-import { ActionRequest, Before, ResourceOptions } from 'adminjs';
+import { ResourceOptions } from 'adminjs';
+import { baseNavigation } from 'src/shared/base.navigation.js';
 import { AccountEntity } from './entity/account.entity.js';
+import scheduleComplianceAction from './actions/schedule-compliance.action.js';
 
 const AccountResource: { resource: typeof AccountEntity; options: ResourceOptions } = {
   resource: AccountEntity,
   options: {
-    id: 'Accounts',
-    // TODO: Create base resource to be extended from the navigation
-    navigation: {
-      name: 'Transfers',
-      icon: 'Home',
-    },
+    navigation: baseNavigation,
     editProperties: ['name', 'bank', 'number', 'branch', 'balance'],
     actions: {
       new: {
-        before: (async (request: ActionRequest) => {
-          console.log(request);
-
-          // TODO: Create a handler for the account to be status checked
-          // TODO: Create a fake bank validator api mock using i18n
-
-          return request;
-        }) as unknown as Before, // TODO: Check for a fix to this
+        after: [scheduleComplianceAction],
       },
     },
   },

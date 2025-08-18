@@ -20,5 +20,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
     'no-shadow': 'off',
+    'max-len': ['error', { code: 120 }],
   },
 };

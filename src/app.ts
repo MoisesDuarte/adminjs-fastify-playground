@@ -2,7 +2,9 @@ import AdminJS from 'adminjs';
 import Fastify from 'fastify';
 import AdminJSFastify from '@adminjs/fastify';
 import initializeDb from './db/index.js';
-import accountResource from './resources/account/account.resource.js';
+
+import AccountResource from './resources/account/account.resource.js';
+import ComplianceResource from './resources/compliance/compliance.resource.js';
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
@@ -14,7 +16,7 @@ const start = async () => {
 
   const admin = new AdminJS({
     rootPath: '/admin',
-    resources: [accountResource],
+    resources: [AccountResource, ComplianceResource],
   });
 
   if (process.env.NODE_ENV === 'production') {
