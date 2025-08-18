@@ -37,7 +37,7 @@ const start = async () => {
   if (NODE_ENV === 'production') {
     await admin.initialize();
   } else {
-    logger.debug('Debug | AdminJS running in development mode.');
+    logger.debug('AdminJS running in development mode.');
     admin.watch();
   }
 
