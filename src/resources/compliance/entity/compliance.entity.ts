@@ -1,9 +1,9 @@
 import { AccountEntity } from 'src/resources/account/entity/account.entity.js';
-import { BaseEntity } from 'src/shared/base.entity.js';
+import { BaseEntity } from 'src/shared/base/base.entity.js';
 import {
   Check, Column, Entity, JoinColumn, ManyToOne,
 } from 'typeorm';
-import { EComplianceStatus } from '../enum/compliance-status.enum.js';
+import { EComplianceStatus } from '../enums/compliance-status.enum.js';
 
 @Entity()
 export class ComplianceEntity extends BaseEntity {

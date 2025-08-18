@@ -2,7 +2,7 @@ import { ActionResponse } from 'adminjs';
 import getDbConnection from '@db/index.js';
 import { ComplianceEntity } from 'src/resources/compliance/entity/compliance.entity.js';
 import { addDays } from 'date-fns';
-import logger from 'src/shared/logger.js';
+import logger from 'src/shared/logger/logger.js';
 
 export default async (response: ActionResponse): Promise<ActionResponse> => {
   try {

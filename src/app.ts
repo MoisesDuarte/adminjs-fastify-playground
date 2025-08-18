@@ -4,7 +4,7 @@ import AdminJS from 'adminjs';
 import AdminJSFastify from '@adminjs/fastify';
 
 // Internal libraries
-import logger from './shared/logger.js';
+import logger from './shared/logger/logger.js';
 
 // Database
 import getDbConnection from './db/index.js';

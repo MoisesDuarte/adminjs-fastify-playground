@@ -1,5 +1,5 @@
 import { ResourceOptions } from 'adminjs';
-import { baseNavigation } from 'src/shared/base.navigation.js';
+import { baseNavigation } from 'src/shared/base/base.navigation.js';
 import { AccountEntity } from './entity/account.entity.js';
 import scheduleComplianceAction from './actions/schedule-compliance.action.js';
 

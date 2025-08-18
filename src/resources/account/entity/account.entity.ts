@@ -5,7 +5,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { BaseEntity } from 'src/shared/base.entity.js';
+import { BaseEntity } from 'src/shared/base/base.entity.js';
 
 import { ComplianceEntity } from 'src/resources/compliance/entity/compliance.entity.js';
 import { EAccountStatus } from '../enums/account-status.enum.js';

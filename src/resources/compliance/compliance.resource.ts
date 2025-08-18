@@ -1,5 +1,5 @@
 import { ResourceOptions } from 'adminjs';
-import { baseNavigation } from 'src/shared/base.navigation.js';
+import { baseNavigation } from 'src/shared/base/base.navigation.js';
 import { ComplianceEntity } from './entity/compliance.entity.js';
 
 export const ComplianceResource: { resource: typeof ComplianceEntity; options: ResourceOptions } = {
