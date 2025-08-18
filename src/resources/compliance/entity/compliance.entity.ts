@@ -5,7 +5,7 @@ import {
 } from 'typeorm';
 import { EComplianceStatus } from '../enums/compliance-status.enum.js';
 
-@Entity()
+@Entity({ name: 'compliances' })
 export class ComplianceEntity extends BaseEntity {
   @Check(`status IN (${Object.values(EComplianceStatus).map((s) => `'${s}'`).join(', ')})`)
   @Column({ type: 'varchar', default: EComplianceStatus.PENDING })
