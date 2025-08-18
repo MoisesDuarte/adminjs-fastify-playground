@@ -1,4 +1,4 @@
-# README
+# AdminJS Fastify Playground
 
 ## Project Overview
 
