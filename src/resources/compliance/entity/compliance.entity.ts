@@ -1,4 +1,4 @@
-import { AccountEntity } from 'src/resources/account/entity/account.entity.js';
+import { Account } from 'src/resources/account/entity/account.entity.js';
 import { BaseEntity } from 'src/shared/base/base.entity.js';
 import {
   Check, Column, Entity, JoinColumn, ManyToOne,
@@ -6,7 +6,7 @@ import {
 import { EComplianceStatus } from '../enums/compliance-status.enum.js';
 
 @Entity({ name: 'compliances' })
-export class ComplianceEntity extends BaseEntity {
+export class Compliance extends BaseEntity {
   @Check(`status IN (${Object.values(EComplianceStatus).map((s) => `'${s}'`).join(', ')})`)
   @Column({ type: 'varchar', default: EComplianceStatus.PENDING })
   status: EComplianceStatus;
@@ -18,6 +18,6 @@ export class ComplianceEntity extends BaseEntity {
   result: any;
 
   @JoinColumn({ name: 'account_id', referencedColumnName: 'id' })
-  @ManyToOne(() => AccountEntity, (account) => account.compliances)
-  account: AccountEntity;
+  @ManyToOne(() => Account, (account) => account.compliances)
+  account: Account;
 }

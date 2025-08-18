@@ -1,12 +1,11 @@
-import { baseNavigation } from 'src/shared/base/base.navigation.js';
 import { IAdminJSResource } from 'src/shared/interfaces/adminjs-resource.interface.js';
-import { AccountEntity } from './entity/account.entity.js';
+import { Account } from './entity/account.entity.js';
 import scheduleComplianceAction from './actions/schedule-compliance.action.js';
 
-const AccountResource: IAdminJSResource<typeof AccountEntity> = {
-  resource: AccountEntity,
+const AccountResource: IAdminJSResource<typeof Account> = {
+  resource: Account,
   options: {
-    navigation: baseNavigation,
+    navigation: null,
     editProperties: ['name', 'bank', 'number', 'branch', 'balance'],
     actions: {
       new: {

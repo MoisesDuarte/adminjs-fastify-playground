@@ -7,11 +7,11 @@ import {
 
 import { BaseEntity } from 'src/shared/base/base.entity.js';
 
-import { ComplianceEntity } from 'src/resources/compliance/entity/compliance.entity.js';
+import { Compliance } from 'src/resources/compliance/entity/compliance.entity.js';
 import { EAccountStatus } from '../enums/account-status.enum.js';
 
 @Entity('accounts')
-export class AccountEntity extends BaseEntity {
+export class Account extends BaseEntity {
   @Check(`status IN (${Object.values(EAccountStatus).map((s) => `'${s}'`).join(', ')})`)
   @Column({ type: 'varchar', default: EAccountStatus.PENDING })
   status: EAccountStatus;
@@ -31,6 +31,6 @@ export class AccountEntity extends BaseEntity {
   @Column({ type: 'int8', default: 0 })
   balance: number;
 
-  @OneToMany(() => ComplianceEntity, (compliance) => compliance.account)
-  compliances: ComplianceEntity[];
+  @OneToMany(() => Compliance, (compliance) => compliance.account)
+  compliances: Compliance[];
 }

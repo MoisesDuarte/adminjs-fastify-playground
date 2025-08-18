@@ -1,11 +1,10 @@
-import { baseNavigation } from 'src/shared/base/base.navigation.js';
 import { IAdminJSResource } from 'src/shared/interfaces/adminjs-resource.interface.js';
-import { ComplianceEntity } from './entity/compliance.entity.js';
+import { Compliance } from './entity/compliance.entity.js';
 
-export const ComplianceResource: IAdminJSResource<typeof ComplianceEntity> = {
-  resource: ComplianceEntity,
+export const ComplianceResource: IAdminJSResource<typeof Compliance> = {
+  resource: Compliance,
   options: {
-    navigation: baseNavigation,
+    navigation: null,
     actions: {
       delete: { isAccessible: false },
       bulkDelete: { isAccessible: false },
