@@ -1,8 +1,8 @@
-import { ResourceOptions } from 'adminjs';
 import { baseNavigation } from 'src/shared/base/base.navigation.js';
+import { IAdminJSResource } from 'src/shared/interfaces/adminjs-resource.interface.js';
 import { ComplianceEntity } from './entity/compliance.entity.js';
 
-export const ComplianceResource: { resource: typeof ComplianceEntity; options: ResourceOptions } = {
+export const ComplianceResource: IAdminJSResource<typeof ComplianceEntity> = {
   resource: ComplianceEntity,
   options: {
     navigation: baseNavigation,
