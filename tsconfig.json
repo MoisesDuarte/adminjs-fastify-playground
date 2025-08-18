@@ -1,3 +1,4 @@
+// TODO: See if there's a setup that works without .js extension on import
 {
   "compilerOptions": {
     "jsx": "react",

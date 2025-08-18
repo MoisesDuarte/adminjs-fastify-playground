@@ -11,6 +11,7 @@ export const ComplianceResource: IAdminJSResource<typeof ComplianceEntity> = {
       bulkDelete: { isAccessible: false },
       edit: { isAccessible: false },
       new: { isAccessible: false },
+      // TODO: Setup action that takes compliance and adds to a bull queue job scheduled at the defined date
     },
   },
 };
