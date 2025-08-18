@@ -2,6 +2,7 @@ import { ActionResponse } from 'adminjs';
 import getDbConnection from '@db/index.js';
 import { ComplianceEntity } from 'src/resources/compliance/entity/compliance.entity.js';
 import { addDays } from 'date-fns';
+import logger from 'src/shared/logger.js';
 
 export default async (response: ActionResponse): Promise<ActionResponse> => {
   try {
@@ -14,11 +15,11 @@ export default async (response: ActionResponse): Promise<ActionResponse> => {
       scheduledAt: addDays(new Date(), 2),
     });
 
-    console.info(`Compliance scheduled for account with id ${response.record.params.id}`);
+    logger.info(`Compliance scheduled for account with id ${response.record.params.id}`);
 
     return response;
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     throw error;
   }
 };
