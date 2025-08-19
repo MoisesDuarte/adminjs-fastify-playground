@@ -29,6 +29,8 @@ This project is a Node.js application built using Fastify, TypeORM, and AdminJS.
 
 ## Project Structure
 
+This project assumes a feature-first approach.
+
 * `src/`: Source code directory
 	+ `app.ts`: Main application file
 	+ `db/`: Database configuration and migrations
