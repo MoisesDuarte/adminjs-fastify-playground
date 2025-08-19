@@ -3,8 +3,9 @@ import Fastify from 'fastify';
 import AdminJS from 'adminjs';
 import AdminJSFastify from '@adminjs/fastify';
 
-// Internal libraries
+// Internal
 import logger from './shared/logger/logger.js';
+import { componentLoader } from './components/components.js';
 
 // Database
 import getDbConnection from './db/index.js';
@@ -32,6 +33,7 @@ const start = async () => {
   const admin = new AdminJS({
     rootPath: '/admin',
     resources: [AccountResource, ComplianceResource],
+    componentLoader,
   });
 
   if (NODE_ENV === 'production') {

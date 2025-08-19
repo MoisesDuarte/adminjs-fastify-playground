@@ -1,4 +1,5 @@
 import { IAdminJSResource } from 'src/shared/interfaces/adminjs-resource.interface.js';
+import { Components } from 'src/components/components.js';
 import { Account } from './entity/account.entity.js';
 
 const AccountResource: IAdminJSResource<typeof Account> = {
@@ -25,6 +26,11 @@ const AccountResource: IAdminJSResource<typeof Account> = {
         type: 'string',
         isRequired: true,
         description: 'Name of the account holder',
+      },
+      status: {
+        components: {
+          list: Components.StatusBadge,
+        },
       },
       taxNumber: {
         type: 'string',
