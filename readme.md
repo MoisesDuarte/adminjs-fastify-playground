@@ -69,11 +69,6 @@ This project assumes a feature-first approach.
 * `reflect-metadata`: Reflect metadata library
 * `typeorm`: TypeORM library
 
-## Development
-
-* Use `docker-compose up` to start the Docker containers
-* Use `docker-compose run app ash` to access the container's shell and run commands
-
 ## License
 
 This project is licensed under the MIT License.
