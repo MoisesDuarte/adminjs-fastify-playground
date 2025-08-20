@@ -1,6 +1,7 @@
 volumes:
   pgdata:
   nodemodules:
+  n8n-data:
 
 services:
   app:
@@ -18,7 +19,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-
+      n8n:
+        condition: service_started
 
   db:
     image: postgres:17-alpine
@@ -38,4 +40,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=development
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - DB_TYPE=sqlite
+      - DB_SQLITE_DATABASE=/home/node/.n8n/database.sqlite
+    volumes:
+      - n8n-data:/home/node/.n8n     
+    restart: unless-stopped
+
     
