@@ -1,0 +1,193 @@
+{
+  "name": "create-compliance-from-account",
+  "nodes": [
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "tableName": {
+          "__rl": true,
+          "value": "accounts",
+          "mode": "list",
+          "cachedResultName": "accounts"
+        },
+        "additionalFields": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTrigger",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "3e0e4f99-e118-40e4-bd1a-92d8f6201b87",
+      "name": "Listen for account insertion",
+      "credentials": {
+        "postgres": {
+          "id": "CzStLeESPnrukQzD",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "compliances",
+          "mode": "list",
+          "cachedResultName": "compliances"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "scheduled_at": "={{ new Date(Date.now() + 2 * 60 * 1000).toISOString() }}",
+            "id": "={{ $json.payload.id }}",
+            "account_id": "={{ $json.payload.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "deleted_at",
+              "displayName": "deleted_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "events",
+              "displayName": "events",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "object",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "scheduled_at",
+              "displayName": "scheduled_at",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "result",
+              "displayName": "result",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "object",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "account_id",
+              "displayName": "account_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        144,
+        0
+      ],
+      "id": "4df56e71-4567-489a-82b0-d376898ac542",
+      "name": "Create compliance for account",
+      "credentials": {
+        "postgres": {
+          "id": "CzStLeESPnrukQzD",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Listen for account insertion": {
+      "main": [
+        [
+          {
+            "node": "Create compliance for account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create compliance for account": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "846088f4-3b93-4085-899d-d54c50bd7978",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "06a7ae3c7a22710c03a9ba2bb36179457478a0aa63b530082b78b544e535cb0b"
+  },
+  "id": "TnfmOtWqjoQjjW5e",
+  "tags": []
+}
