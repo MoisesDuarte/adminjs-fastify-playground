@@ -1,6 +1,7 @@
 import { IAdminJSResource } from 'src/shared/interfaces/adminjs-resource.interface.js';
 import { Components } from 'src/components/components.js';
 import { Account } from './entity/account.entity.js';
+import afterAction from './actions/after.action.js';
 
 const AccountResource: IAdminJSResource<typeof Account> = {
   resource: Account,
@@ -65,6 +66,11 @@ const AccountResource: IAdminJSResource<typeof Account> = {
       balance: {
         type: 'number',
         description: 'Account balance, defined as integer value, with 2 last digits representing cents',
+      },
+    },
+    actions: {
+      new: {
+        after: afterAction,
       },
     },
   },

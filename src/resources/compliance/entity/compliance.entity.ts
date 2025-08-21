@@ -11,9 +11,6 @@ export class Compliance extends BaseEntity {
   @Column({ type: 'varchar', default: EComplianceStatus.PENDING })
   status: EComplianceStatus;
 
-  @Column({ type: 'timestamp', comment: 'Scheduled date for compliance to be processed' })
-  scheduledAt: Date;
-
   @Column({ type: 'jsonb', nullable: true })
   result: any;
 

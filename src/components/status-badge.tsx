@@ -12,6 +12,7 @@ const StatusBadge: React.FC<ShowPropertyProps> = (props: ShowPropertyProps) => {
     ACTIVE: { background: '#34D399', color: '#065F46' }, // green background, dark green text
     INACTIVE: { background: '#F87171', color: '#7F1D1D' }, // red background, dark red text
     BLOCKED: { background: '#A78BFA', color: '#4C1D95' }, // purple background, dark purple text
+    DEFAULT: { background: '#F3F4F6', color: '#374151' }, // gray background, dark gray text
   };
 
   return (
@@ -20,8 +21,8 @@ const StatusBadge: React.FC<ShowPropertyProps> = (props: ShowPropertyProps) => {
       borderRadius: '10px',
       padding: '5px 10px',
       fontWeight: 'bold',
-      backgroundColor: statusColors[value].background,
-      color: statusColors[value].color,
+      backgroundColor: statusColors[value].background || statusColors.DEFAULT.background,
+      color: statusColors[value].color || statusColors.DEFAULT.color,
     }}
     >
       { value }
