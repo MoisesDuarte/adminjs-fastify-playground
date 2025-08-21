@@ -4,6 +4,9 @@ import AdminJS from 'adminjs';
 import AdminJSFastify from '@adminjs/fastify';
 
 // Internal
+import { FastifyAdapter } from '@bull-board/fastify';
+import { createBullBoard } from '@bull-board/api';
+import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import logger from './shared/logger/logger.js';
 import { componentLoader } from './components/components.js';
 
@@ -13,6 +16,7 @@ import getDbConnection from './db/index.js';
 // Resources
 import AccountResource from './resources/account/account.resource.js';
 import ComplianceResource from './resources/compliance/compliance.resource.js';
+import { complianceQueue } from './queues/index.js';
 
 const {
   PORT = 3000,
@@ -22,6 +26,19 @@ const {
 
 const start = async () => {
   const app = Fastify({ loggerInstance: logger });
+
+  const bullAdapter = new FastifyAdapter();
+
+  createBullBoard({
+    queues: [new BullMQAdapter(complianceQueue)],
+    serverAdapter: bullAdapter,
+  });
+
+  bullAdapter.setBasePath('/queues');
+
+  app.register(bullAdapter.registerPlugin(), {
+    prefix: '/queues',
+  });
 
   try {
     await getDbConnection();

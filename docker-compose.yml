@@ -2,6 +2,7 @@ volumes:
   pgdata:
   nodemodules:
   n8n-data:
+  redis-data:
 
 services:
   app:
@@ -19,8 +20,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_healthy
       n8n:
         condition: service_started
+      
 
   db:
     image: postgres:17-alpine
@@ -40,6 +44,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+
+  redis:
+    image: redis/redis-stack:6.2.6-v9
+    volumes:
+      - redis-data:/data
+    ports:
+     - '8021:8001'
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
 
   n8n:
     image: n8nio/n8n:latest
