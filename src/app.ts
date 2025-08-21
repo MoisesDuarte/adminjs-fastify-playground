@@ -2,13 +2,14 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import AdminJS from 'adminjs';
 import AdminJSFastify from '@adminjs/fastify';
+import { dark, light, noSidebar } from '@adminjs/themes';
 
 // Internal
 import { FastifyAdapter } from '@bull-board/fastify';
 import { createBullBoard } from '@bull-board/api';
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import logger from './shared/logger/logger.js';
-import { componentLoader } from './components/components.js';
+import { componentLoader, Components } from './components/components.js';
 
 // Database
 import getDbConnection from './db/index.js';
@@ -58,6 +59,11 @@ const setupAdminJs = async (app: FastifyInstance) => {
     rootPath: '/admin',
     resources: [AccountResource, ComplianceResource],
     componentLoader,
+    defaultTheme: dark.id,
+    availableThemes: [dark, light, noSidebar],
+    dashboard: {
+      component: Components.Dashboard,
+    },
   });
 
   if (NODE_ENV === 'production') {

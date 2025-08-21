@@ -38,6 +38,8 @@ export const ComplianceResource: IAdminJSResource<typeof Compliance> = {
 
           if (record && record.isValid()) {
             logger.info(`Calling webhook for compliance with id ${record.id()}`);
+            logger.info(`Record data: ${record.toJSON()}`);
+
             // TODO: Trigger n8n compliance webhook
           }
 
