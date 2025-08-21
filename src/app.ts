@@ -16,7 +16,10 @@ import getDbConnection from './db/index.js';
 // Resources
 import AccountResource from './resources/account/account.resource.js';
 import ComplianceResource from './resources/compliance/compliance.resource.js';
-import { createQueue, setupQueueWorker } from './queues/index.js';
+
+// Bull
+import { complianceQueue } from './bull/queues/compliance.queue.js';
+import { setupBullWorkers } from './bull/index.js';
 
 const {
   PORT = 3000,
@@ -25,8 +28,7 @@ const {
 } = process.env;
 
 const setupBull = async (app: FastifyInstance) => {
-  const complianceQueue = createQueue('compliance');
-  await setupQueueWorker(complianceQueue.name);
+  setupBullWorkers();
 
   const bullAdapter = new FastifyAdapter();
 
@@ -42,7 +44,7 @@ const setupBull = async (app: FastifyInstance) => {
   });
 };
 
-const setupDb = async (app: FastifyInstance) => {
+const setupDatabase = async (app: FastifyInstance) => {
   try {
     await getDbConnection();
   } catch (err) {
@@ -76,7 +78,7 @@ const start = async () => {
 
   await setupBull(app);
 
-  await setupDb(app);
+  await setupDatabase(app);
 
   await setupAdminJs(app);
 
