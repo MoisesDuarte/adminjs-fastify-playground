@@ -1,5 +1,5 @@
 // Core libraries
-import Fastify from 'fastify';
+import Fastify, { FastifyInstance } from 'fastify';
 import AdminJS from 'adminjs';
 import AdminJSFastify from '@adminjs/fastify';
 
@@ -24,9 +24,7 @@ const {
   NODE_ENV,
 } = process.env;
 
-const start = async () => {
-  const app = Fastify({ loggerInstance: logger });
-
+const setupBullBoard = async (app: FastifyInstance) => {
   const bullAdapter = new FastifyAdapter();
 
   createBullBoard({
@@ -39,14 +37,18 @@ const start = async () => {
   app.register(bullAdapter.registerPlugin(), {
     prefix: '/queues',
   });
+};
 
+const setupDb = async (app: FastifyInstance) => {
   try {
     await getDbConnection();
   } catch (err) {
     app.log.error(`Database initialization failed: ${err}`);
     process.exit(1);
   }
+};
 
+const setupAdminJs = async (app: FastifyInstance) => {
   const admin = new AdminJS({
     rootPath: '/admin',
     resources: [AccountResource, ComplianceResource],
@@ -61,10 +63,20 @@ const start = async () => {
   }
 
   await AdminJSFastify.buildRouter(admin, app);
+};
+
+const start = async () => {
+  const app = Fastify({ loggerInstance: logger });
+
+  await setupBullBoard(app);
+
+  await setupDb(app);
+
+  await setupAdminJs(app);
 
   try {
     await app.listen({ port: Number(PORT), host: HOST });
-    logger.info(`AdminJS available at http://localhost:${PORT}${admin.options.rootPath}`);
+    logger.info(`AdminJS available at http://localhost:${PORT}/admin`);
   } catch (err) {
     logger.error(`Fastify failed to start: ${JSON.stringify(err)}`);
     process.exit(1);
