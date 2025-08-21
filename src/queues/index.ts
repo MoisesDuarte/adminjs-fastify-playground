@@ -1,10 +1,16 @@
-import { Queue } from 'bullmq';
+import {
+  ConnectionOptions, Queue, Worker,
+} from 'bullmq';
 
-const complianceQueue = new Queue('compliance', {
-  connection: {
-    host: process.env.REDIS_HOST,
-    port: Number(process.env.REDIS_PORT),
-  },
-});
+const connection: ConnectionOptions = {
+  host: process.env.REDIS_HOST,
+  port: Number(process.env.REDIS_PORT),
+};
 
-export { complianceQueue };
+export const createQueue = (name: string) => new Queue(name, { connection });
+
+export const setupQueueWorker = async (queueName: string) => new Worker(
+  queueName,
+  async (job) => ({ jobId: `This is the return value of job (${job.id})` }),
+  { connection },
+);
